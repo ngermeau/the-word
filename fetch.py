@@ -55,14 +55,13 @@ def fetch_and_store_articles(db_conn):
     for key, value in rss_urls.items():
         feed = parse(value)
         scrap_date = (datetime.now().date().isoformat(),)
-        print(scrap_date)
         for entry in feed.entries:
             articles.append(
                 {
                     "id": md5(f"{entry.title}{key}{scrap_date}".encode()).hexdigest(),
                     "title": entry.title,
                     "source": key,
-                    "date": datetime.now().isoformat(),
+                    "date": datetime.now().date().isoformat(),
                 }
             )
     cursor = db_conn.cursor()
