@@ -3,6 +3,7 @@ from datetime import datetime
 import sqlite3
 from hashlib import md5
 
+
 rss_urls = {
     # United States
     "nytimes": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
@@ -41,7 +42,7 @@ today = datetime.now().date().isoformat()
 
 # Init database if not in existence
 cursor = db_conn.cursor()
-cursor.execute("""
+_ = cursor.execute("""
     CREATE TABLE IF NOT EXISTS articles (
     id TEXT PRIMARY KEY,
     title TEXT,
@@ -53,19 +54,19 @@ db_conn.commit()
 
 # Fetch the articles and store into database
 articles = []
-for key, value in rss_urls.items():
-    feed = parse(value)
+for site_name, rss_url in rss_urls.items():
+    feed = parse(rss_url)
     for entry in feed.entries:
         articles.append(
             {
-                "id": md5(f"{entry.title}{key}{today}".encode()).hexdigest(),
+                "id": md5(f"{entry.title}{site_name}{today}".encode()).hexdigest(),
                 "title": entry.title,
-                "source": key,
+                "source": site_name,
                 "date": today,
             }
         )
 
-cursor.executemany(
+_ = cursor.executemany(
     "INSERT OR IGNORE INTO articles (id, title, source, date) VALUES (:id, :title, :source, :date)",
     articles,
 )
