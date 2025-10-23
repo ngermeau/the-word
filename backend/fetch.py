@@ -3,7 +3,6 @@ from datetime import datetime
 import sqlite3
 from hashlib import md5
 
-
 rss_urls = {
     # United States
     "nytimes": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
@@ -65,10 +64,12 @@ for site_name, rss_url in rss_urls.items():
                 "date": today,
             }
         )
-
-_ = cursor.executemany(
+print(len(articles))
+print(articles[1])
+cursor.executemany(
     "INSERT OR IGNORE INTO articles (id, title, source, date) VALUES (:id, :title, :source, :date)",
     articles,
 )
+print(cursor.rowcount)
 db_conn.commit()
 db_conn.close()

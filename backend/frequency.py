@@ -11,7 +11,8 @@ from nltk import pos_tag, word_tokenize
 DB_NAME = "articles.db"
 db_conn = sqlite3.connect(DB_NAME)
 cursor = db_conn.cursor()
-today = datetime.now().date().isoformat()
+# today = datetime.now().date().isoformat()
+today = "2025-10-18"
 
 # Init database if none in existence
 cursor.execute("""
@@ -39,12 +40,12 @@ nouns = [
 # Get the frequencies for the nouns
 nouns_frequencies = Counter(nouns)
 print(nouns_frequencies)
-
+print(json.dumps(nouns_frequencies.most_common(3)))
 # Store into database for the current day
-cursor.execute(
-    "INSERT OR REPLACE INTO nouns_frequencies(date, nouns_frequencies) VALUES (?, ?)",
-    (today, json.dumps(nouns_frequencies.most_common(100))),
-)
-db_conn.commit()
+# cursor.execute(
+#     "INSERT OR REPLACE INTO nouns_frequencies(date, nouns_frequencies) VALUES (?, ?)",
+#     (today, json.dumps(nouns_frequencies.most_common(100))),
+# )
+# db_conn.commit()
 
 db_conn.close()
