@@ -64,8 +64,6 @@ for site_name, rss_url in rss_urls.items():
                 "date": today,
             }
         )
-print(len(articles))
-print(articles[1])
 cursor.executemany(
     "INSERT OR IGNORE INTO articles (id, title, source, date) VALUES (:id, :title, :source, :date)",
     articles,
