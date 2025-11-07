@@ -1,5 +1,6 @@
 export let numberOfRows = 50;
 export let numberOfCols = 50;
+export let scale = 4;
 export let grid = Array(numberOfRows)
 	.fill(null)
 	.map(() => Array(numberOfCols).fill(0));
@@ -37,7 +38,7 @@ export function findAvailablePosition(word) {
 export function measureWord(word, orientation) {
 	const cellWidth = window.innerWidth / numberOfCols;
 	const cellHeight = window.innerHeight / numberOfRows;
-	const fontSize = word[1] / 5;
+	const fontSize = word[1] / scale;
 	const elem = document.createElement('span');
 	elem.style.position = 'absolute';
 	elem.style.visibility = 'hidden';
@@ -61,11 +62,13 @@ export function drawWord(word, wordPosition) {
 	grid.slice(row, row + rowSpan).forEach((row) => {
 		row.fill(1, col, col + colSpan);
 	});
+
 	const elem = document.createElement('div');
 	elem.style.fontSize = fontSize + 'rem';
 	elem.textContent = word[0];
-	// if (Math.random() < 0.5) {
-	if (word[1] > 10) {
+
+	// if occurence is high
+	if (word[1] > 8) {
 		elem.style.backgroundColor = 'black';
 		elem.style.color = 'white';
 	}

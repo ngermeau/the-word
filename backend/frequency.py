@@ -15,9 +15,9 @@ today = datetime.now().date().isoformat()
 
 # Init database if none in existence
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS nouns_frequencies(
+    CREATE TABLE IF NOT EXISTS frequencies(
     date DATETIME PRIMARY KEY,
-    nouns_frequencies TEXT
+    words TEXT
     )
 """)
 db_conn.commit()
@@ -37,10 +37,10 @@ nouns = [
 ]
 
 # Get the frequencies for the nouns
-nouns_frequencies = Counter(nouns)
+frequencies = Counter(nouns)
 cursor.execute(
-    "INSERT OR REPLACE INTO nouns_frequencies(date, nouns_frequencies) VALUES (?, ?)",
-    (today, json.dumps(nouns_frequencies.most_common(200))),
+    "INSERT OR REPLACE INTO frequencies(date, words) VALUES (?, ?)",
+    (today, json.dumps(frequencies.most_common(100))),
 )
 db_conn.commit()
 
