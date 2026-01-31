@@ -5,5 +5,5 @@ cd "$(dirname "$0")"
 
 # Activate virtual environment and run the script
 source venv/bin/activate
-python3 frequency.py
+python3 calculate_frequency.py
 deactivate
