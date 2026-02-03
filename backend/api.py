@@ -1,8 +1,9 @@
-from fastapi import FastAPI
-import sqlite3
 import json
-from fastapi.responses import JSONResponse
+import sqlite3
 from datetime import datetime
+
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
 DB_NAME = "articles.db"
 app = FastAPI()

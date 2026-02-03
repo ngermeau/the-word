@@ -3,210 +3,203 @@
     "continent": "Europe",
     "country": "United Kingdom",
     "name": "The Guardian",
-    "language": "English",
-    "rss_url": "https://www.theguardian.com/uk/rss"
+    "language": "en",
+    "rss_url": "https://www.theguardian.com/uk/rsa"
   },
   {
     "continent": "Europe",
     "country": "United Kingdom",
     "name": "Financial Times",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.ft.com/rss/home"
   },
   {
     "continent": "Europe",
     "country": "France",
     "name": "Le Monde",
-    "language": "French",
+    "language": "fr",
     "rss_url": "https://www.lemonde.fr/rss/une.xml"
-  },
-  {
-    "continent": "Europe",
-    "country": "France",
-    "name": "Le Monde (English)",
-    "language": "English",
-    "rss_url": "https://www.lemonde.fr/en/rss/une.xml"
   },
   {
     "continent": "Europe",
     "country": "Spain",
     "name": "El País",
-    "language": "Spanish",
+    "language": "es",
     "rss_url": "https://feeds.elpais.com/mrss-s/pages/ep/site/english.elpais.com/portada"
   },
   {
     "continent": "Europe",
     "country": "Germany",
     "name": "Der Spiegel",
-    "language": "German",
+    "language": "de",
     "rss_url": "https://www.spiegel.de/international/index.rss"
   },
   {
     "continent": "Europe",
     "country": "Netherlands",
     "name": "NRC Handelsblad",
-    "language": "Dutch",
+    "language": "nl",
     "rss_url": "https://www.nrc.nl/rss/"
   },
   {
     "continent": "Europe",
     "country": "Italy",
     "name": "Corriere della Sera",
-    "language": "Italian",
+    "language": "it",
     "rss_url": "http://www.corriere.it/rss/homepage.xml"
   },
   {
     "continent": "North America",
     "country": "United States",
     "name": "The New York Times",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
   },
   {
     "continent": "North America",
     "country": "United States",
     "name": "The Washington Post",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://feeds.washingtonpost.com/rss/world"
   },
   {
     "continent": "North America",
     "country": "United States",
     "name": "The Wall Street Journal",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://feeds.content.dowjones.io/public/rss/RSSWorldNews"
   },
   {
     "continent": "North America",
     "country": "Canada",
     "name": "The Globe and Mail",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.theglobeandmail.com/arc/outbound-feed/?outputType=xml"
   },
   {
     "continent": "North America",
     "country": "Canada",
     "name": "La Presse",
-    "language": "French",
+    "language": "fr",
     "rss_url": "https://www.lapresse.ca/actualites/rss"
   },
   {
     "continent": "South America",
     "country": "Brazil",
     "name": "Folha de S.Paulo",
-    "language": "Portuguese",
+    "language": "pt",
     "rss_url": "https://feeds.folha.uol.com.br/emcimadahora/rss091.xml"
   },
   {
     "continent": "South America",
     "country": "Brazil",
     "name": "O Globo",
-    "language": "Portuguese",
+    "language": "pt",
     "rss_url": "https://oglobo.globo.com/rss.xml"
   },
   {
     "continent": "South America",
     "country": "Argentina",
     "name": "La Nación",
-    "language": "Spanish",
+    "language": "es",
     "rss_url": "https://www.lanacion.com.ar/arc/outbound-feed/?outputType=xml"
   },
   {
     "continent": "South America",
     "country": "Colombia",
     "name": "El Tiempo",
-    "language": "Spanish",
+    "language": "es",
     "rss_url": "https://www.eltiempo.com/rss"
   },
   {
     "continent": "Asia",
     "country": "India",
     "name": "The Times of India",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://timesofindia.indiatimes.com/rssfeedstopstories.cms"
   },
   {
     "continent": "Asia",
     "country": "India",
     "name": "The Hindu",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.thehindu.com/news/national/feeder/default.rss"
   },
   {
     "continent": "Asia",
     "country": "Japan",
     "name": "The Japan Times",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.japantimes.co.jp/feed/"
   },
   {
     "continent": "Asia",
     "country": "Hong Kong",
     "name": "South China Morning Post",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.scmp.com/rss/91/feed"
   },
   {
     "continent": "Asia",
     "country": "Singapore",
     "name": "The Straits Times",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.straitstimes.com/news/singapore/rss.xml"
   },
   {
     "continent": "Asia",
     "country": "Qatar",
     "name": "Al Jazeera",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.aljazeera.com/xml/rss/all.xml"
   },
   {
     "continent": "Africa",
     "country": "South Africa",
     "name": "Daily Maverick",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.dailymaverick.co.za/dmrss/"
   },
   {
     "continent": "Africa",
     "country": "South Africa",
     "name": "Mail & Guardian",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://mg.co.za/feed/"
   },
   {
     "continent": "Africa",
     "country": "Kenya",
     "name": "The East African",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.theeastafrican.co.ke/tea/rss"
   },
   {
     "continent": "Africa",
     "country": "Egypt",
     "name": "Al Ahram",
-    "language": "Arabic",
+    "language": "ar",
     "rss_url": "https://gate.ahram.org.eg/RSS/"
   },
   {
     "continent": "Oceania",
     "country": "Australia",
     "name": "The Sydney Morning Herald",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.smh.com.au/rss/feed.xml"
   },
   {
     "continent": "Oceania",
     "country": "Australia",
     "name": "The Australian",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.theaustralian.com.au/feed/rss"
   },
   {
     "continent": "Oceania",
     "country": "New Zealand",
     "name": "The New Zealand Herald",
-    "language": "English",
+    "language": "en",
     "rss_url": "https://www.nzherald.co.nz/arc/outboundfeed/?outputType=xml"
   }
 ]
