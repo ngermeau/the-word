@@ -1,5 +1,5 @@
-import json
 import logging
+import yaml
 import sqlite3
 from datetime import datetime
 from hashlib import md5
@@ -18,6 +18,11 @@ translator = pipeline(
 )
 fr_to_en = partial(translator, src_lang="fra_Latn", tgt_lang="eng_Latn")
 es_to_en = partial(translator, src_lang="spa_Latn", tgt_lang="eng_Latn")
+de_to_en = partial(translator, src_lang="deu_Latn", tgt_lang="eng_Latn")
+nl_to_en = partial(translator, src_lang="nld_Latn", tgt_lang="eng_Latn")
+it_to_en = partial(translator, src_lang="ita_Latn", tgt_lang="eng_Latn")
+pt_to_en = partial(translator, src_lang="por_Latn", tgt_lang="eng_Latn")
+ar_to_en = partial(translator, src_lang="ara_Arab", tgt_lang="eng_Latn")
 
 def translate_to_en(text, language):
     if language == "en":
@@ -28,15 +33,36 @@ def translate_to_en(text, language):
         return es_to_en(text)[0]['translation_text']
     elif language == "de":
         return de_to_en(text)[0]['translation_text']
+    elif language == "nl":
+        return nl_to_en(text)[0]['translation_text']
+    elif language == "it":
+        return it_to_en(text)[0]['translation_text']
+    elif language == "pt":
+        return pt_to_en(text)[0]['translation_text']
+    elif language == "ar":
+        return ar_to_en(text)[0]['translation_text']
     else:
         return text
 
+def insert_into_database(articles):
+    db_conn = sqlite3.connect(DB_NAME)
+    cursor = db_conn.cursor()
+    cursor.executemany(
+        "INSERT OR IGNORE INTO articles (id, title, source, date) VALUES (:id, :title, :source, :date)",
+        articles,
+    )
+    logger.info(f"### Inserted {cursor.rowcount} new articles into database")
+    db_conn.commit()
+    db_conn.close()
+
+
 # Open database connection
 DB_NAME = "articles.db"
-db_conn = sqlite3.connect(DB_NAME)
 
 # Init database if not in existence
-logger.info("### Creating table if none existent ###")
+logger.info("### DATABASE INIT")
+logger.info("### Creating table if none existent")
+db_conn = sqlite3.connect(DB_NAME)
 cursor = db_conn.cursor()
 _ = cursor.execute("""
     CREATE TABLE IF NOT EXISTS articles (
@@ -47,11 +73,13 @@ _ = cursor.execute("""
     )
 """)
 db_conn.commit()
+db_conn.close()
 logger.info("")
 
 # Fetch the articles and store into database
-with open("newspapers.json") as f:
-    newspapers = json.load(f)
+logger.info("### ARTICLES FETCHING")
+with open("newspapers.yaml") as f:
+    newspapers = yaml.safe_load(f)
 
 today = datetime.now().date().isoformat()
 total_articles = []
@@ -60,7 +88,7 @@ for newspaper in newspapers:
     source_name = newspaper["name"]
     rss_url = newspaper["rss_url"]
     language = newspaper["language"]
-    logger.info(f"### Fetching {source_name} ###")
+    logger.info(f"### Fetching {source_name}")
     feed = parse(rss_url)
     try:
         feed.channel.title # Testing url is still working
@@ -79,17 +107,5 @@ for newspaper in newspapers:
             }
         )
     logger.info(f"### Found {len(articles)} articles for {source_name}")
-    total_articles += articles
-    logger.info(f"### Found {len(total_articles)} articles in total")
+    insert_into_database(articles)
     logger.info("")
-
-
-# Insert articles in database
-# cursor = db_conn.cursor()
-# cursor.executemany(
-#     "INSERT OR IGNORE INTO articles (id, title, source, date) VALUES (:id, :title, :source, :date)",
-#     articles,
-# )
-# print(cursor.rowcount)
-# db_conn.commit()
-# db_conn.close()
