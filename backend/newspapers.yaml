@@ -3,72 +3,71 @@
   name: The Guardian
   language: en
   rss_url: https://www.theguardian.com/world/rss
+# - continent: Europe
+#   country: France
+#   name: Le Monde
+#   language: fr
+#   rss_url: https://www.lemonde.fr/international/rss_full.xml
 
-- continent: Europe
-  country: France
-  name: Le Monde
-  language: fr
-  rss_url: https://www.lemonde.fr/international/rss_full.xml
+# - continent: Europe
+#   country: Spain
+#   name: El País
+#   language: es
+#   rss_url: https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada
 
-- continent: Europe
-  country: Spain
-  name: El País
-  language: es
-  rss_url: https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada
+# - continent: Europe
+#   country: Germany
+#   name: Der Spiegel
+#   language: de
+#   rss_url: https://www.spiegel.de/ausland/index.rss
 
-- continent: Europe
-  country: Germany
-  name: Der Spiegel
-  language: de
-  rss_url: https://www.spiegel.de/ausland/index.rss
+# - continent: Europe
+#   country: Italy
+#   name: Corriere della Sera
+#   language: it
+#   rss_url: https://www.corriere.it/dynamic-feed/rss/section/Esteri.xml
 
-- continent: Europe
-  country: Italy
-  name: Corriere della Sera
-  language: it
-  rss_url: https://www.corriere.it/dynamic-feed/rss/section/Esteri.xml
+# - continent: Europe
+#   country: Multiple
+#   name: Euronews
+#   language: en
+#   rss_url: https://www.euronews.com/rss
 
-- continent: Europe
-  country: Multiple
-  name: Euronews
-  language: en
-  rss_url: https://www.euronews.com/rss
+# - continent: Europe
+#   country: Switzerland
+#   name: Neue Zürcher Zeitung (NZZ)
+#   language: de
+#   rss_url: https://www.nzz.ch/international.rss
 
-- continent: Europe
-  country: Switzerland
-  name: Neue Zürcher Zeitung (NZZ)
-  language: de
-  rss_url: https://www.nzz.ch/international.rss
+# - continent: North America
+#   country: United States
+#   name: The New York Times
+#   language: en
+#   rss_url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml
 
-- continent: North America
-  country: United States
-  name: The New York Times
-  language: en
-  rss_url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml
+# - continent: North America
+#   country: United States
+#   name: The Washington Post
+#   language: en
+#   rss_url: https://feeds.washingtonpost.com/rss/world
 
-- continent: North America
-  country: United States
-  name: The Washington Post
-  language: en
-  rss_url: https://feeds.washingtonpost.com/rss/world
+# - continent: North America
+#   country: United States
+#   name: The Wall Street Journal
+#   language: en
+#   rss_url: https://feeds.content.dowjones.io/public/rss/RSSWorldNews
 
-- continent: North America
-  country: United States
-  name: The Wall Street Journal
-  language: en
-  rss_url: https://feeds.content.dowjones.io/public/rss/RSSWorldNews
+# - continent: North America
+#   country: Canada
+#   name: The Globe and Mail
+#   language: en
+#   rss_url: https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/world/
 
-- continent: North America
-  country: Canada
-  name: The Globe and Mail
-  language: en
-  rss_url: https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/world/
-
-- continent: North America
-  country: Canada
-  name: La Presse
-  language: fr
-  rss_url: https://www.lapresse.ca/international/rss
+# - continent: North America
+#   country: Canada
+#   name: La Presse
+#   language: fr
+#   rss_url: https://www.lapresse.ca/international/rss
 # - continent: South America
 #   country: Brazil
 #   name: Folha de S.Paulo

@@ -1,12 +1,15 @@
 import logging
-import yaml
-import sqlite3
 from datetime import datetime
+from functools import partial
 from hashlib import md5
 
+import yaml
+from database import db_connection
 from feedparser import parse
-from functools import partial
 from transformers import pipeline
+
+# Use today as current iteration
+today = datetime.now().date().isoformat()
 
 # Setup logger
 logging.basicConfig(level=logging.INFO)
@@ -24,31 +27,33 @@ it_to_en = partial(translator, src_lang="ita_Latn", tgt_lang="eng_Latn")
 pt_to_en = partial(translator, src_lang="por_Latn", tgt_lang="eng_Latn")
 ar_to_en = partial(translator, src_lang="ara_Arab", tgt_lang="eng_Latn")
 
+
 def translate_to_en(text, language):
     if language == "en":
         return text
     if language == "fr":
-        return fr_to_en(text)[0]['translation_text']
+        return fr_to_en(text)[0]["translation_text"]
     elif language == "es":
-        return es_to_en(text)[0]['translation_text']
+        return es_to_en(text)[0]["translation_text"]
     elif language == "de":
-        return de_to_en(text)[0]['translation_text']
+        return de_to_en(text)[0]["translation_text"]
     elif language == "nl":
-        return nl_to_en(text)[0]['translation_text']
+        return nl_to_en(text)[0]["translation_text"]
     elif language == "it":
-        return it_to_en(text)[0]['translation_text']
+        return it_to_en(text)[0]["translation_text"]
     elif language == "pt":
-        return pt_to_en(text)[0]['translation_text']
+        return pt_to_en(text)[0]["translation_text"]
     elif language == "ar":
-        return ar_to_en(text)[0]['translation_text']
+        return ar_to_en(text)[0]["translation_text"]
     else:
         return text
 
+
 def insert_into_database(articles):
-    db_conn = sqlite3.connect(DB_NAME)
+    db_conn = db_connection()
     cursor = db_conn.cursor()
     cursor.executemany(
-        "INSERT OR IGNORE INTO articles (id, title, source, date) VALUES (:id, :title, :source, :date)",
+        "INSERT OR IGNORE INTO daily_articles (id, title, source, date) VALUES (:id, :title, :source, :date)",
         articles,
     )
     logger.info(f"### Inserted {cursor.rowcount} new articles into database")
@@ -56,32 +61,14 @@ def insert_into_database(articles):
     db_conn.close()
 
 
-# Open database connection
-DB_NAME = "articles.db"
-
-# Init database if not in existence
-logger.info("### DATABASE INIT")
-logger.info("### Creating table if none existent")
-db_conn = sqlite3.connect(DB_NAME)
-cursor = db_conn.cursor()
-_ = cursor.execute("""
-    CREATE TABLE IF NOT EXISTS articles (
-    id TEXT PRIMARY KEY,
-    title TEXT,
-    source TEXT,
-    date DATETIME
-    )
-""")
-db_conn.commit()
-db_conn.close()
+logger.info(f"### FETCHING ARTICLES FOR {today}")
 logger.info("")
 
 # Fetch the articles and store into database
-logger.info("### ARTICLES FETCHING")
+logger.info("### FETCHING ARTICLES")
 with open("newspapers.yaml") as f:
     newspapers = yaml.safe_load(f)
 
-today = datetime.now().date().isoformat()
 total_articles = []
 for newspaper in newspapers:
     articles = []
@@ -91,13 +78,13 @@ for newspaper in newspapers:
     logger.info(f"### Fetching {source_name}")
     feed = parse(rss_url)
     try:
-        feed.channel.title # Testing url is still working
+        feed.channel.title  # Testing url is still working
     except AttributeError:
         logger.error(f"{source_name} rss url is failing")
         logger.info("")
         continue
     for entry in feed.entries:
-        article_title =  translate_to_en(entry.title, language)
+        article_title = translate_to_en(entry.title, language)
         articles.append(
             {
                 "id": md5(f"{article_title}{source_name}{today}".encode()).hexdigest(),
