@@ -17,7 +17,8 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 		const data = await response.json();
 
 		return {
-			data
+			data,
+			date
 		};
 	} catch (error) {
 		console.error('Error fetching words:', error);

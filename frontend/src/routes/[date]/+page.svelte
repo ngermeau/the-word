@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { findAvailablePosition, drawWord } from '$lib/utils.js';
+	import { findAvailablePosition, drawWord, numberOfRows, numberOfCols } from '$lib/utils.js';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -14,24 +14,43 @@
 			? frequencies
 			: Object.entries(frequencies).map(([word, count]) => ({ word, count }));
 
-		const RATIO = 1.414; // augmented fourth
-		const BASE = 1.414; // rem
+		const RATIO = 1.414;
 		const STEPS = 8;
-		const typeScale = Array.from({ length: STEPS }, (_, i) =>
-			parseFloat((BASE * Math.pow(RATIO, i)).toFixed(3))
+		const baseScale = Array.from({ length: STEPS }, (_, i) =>
+			parseFloat(Math.pow(RATIO, i).toFixed(3))
 		);
-		// typeScale ≈ [1, 1.414, 2, 2.828, 4, 5.657, 8, 11.314]
 
+		// Assign step indices from frequency
 		const maxCount = Math.max(...wordsArray.map((w) => w[1]));
 		const minCount = Math.min(...wordsArray.map((w) => w[1]));
 		const range = maxCount - minCount || 1;
-		wordsArray = wordsArray.map((w) => {
+		const wordSteps = wordsArray.map((w) => {
 			const normalized = (w[1] - minCount) / range;
-			const stepIndex = Math.min(Math.floor(normalized * STEPS), STEPS - 1);
-			return [w[0], typeScale[stepIndex]];
+			return Math.min(Math.floor(normalized * STEPS), STEPS - 1);
 		});
 
+		// Measure words at BASE=1 to find adaptive scale
+		const cellWidth = window.innerWidth / numberOfCols;
+		const cellHeight = window.innerHeight / numberOfRows;
+		let totalCells = 0;
+		wordsArray.forEach((w, i) => {
+			const elem = document.createElement('span');
+			elem.style.cssText = `position:absolute;visibility:hidden;font-family:inherit;text-transform:uppercase;font-size:${baseScale[wordSteps[i]]}vw;padding:1px 2px`;
+			elem.textContent = w[0];
+			document.body.appendChild(elem);
+			totalCells += Math.ceil(elem.offsetWidth / cellWidth) * Math.ceil(elem.offsetHeight / cellHeight);
+			document.body.removeChild(elem);
+		});
+
+		// Scale BASE so words fill 75% of the grid
+		const BASE = Math.max(1, Math.sqrt((numberOfRows * numberOfCols * 0.75) / totalCells));
+		const typeScale = baseScale.map((s) => parseFloat((s * BASE).toFixed(3)));
+
+		wordsArray = wordsArray.map((w, i) => [w[0], typeScale[wordSteps[i]]]);
+		wordsArray.push([data.date, typeScale[2], '#ffffff']);
+
 		wordsArray.sort(() => Math.random() - 0.5);
+
 		wordsArray.forEach((word) => {
 			let wordPosition = findAvailablePosition(word);
 			if (wordPosition) drawWord(word, wordPosition);

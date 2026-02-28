@@ -43,7 +43,7 @@ export function measureWord(word, orientation) {
 	elem.style.position = 'absolute';
 	elem.style.visibility = 'hidden';
 	elem.style.textTransform = 'uppercase';
-	elem.style.fontSize = fontSize + 'rem';
+	elem.style.fontSize = fontSize + 'vw';
 	if (orientation == 'vertical') {
 		elem.style.writingMode = 'vertical-rl';
 	}
@@ -65,13 +65,14 @@ export function drawWord(word, wordPosition) {
 	});
 
 	const elem = document.createElement('div');
-	elem.style.fontSize = fontSize + 'rem';
+	elem.style.fontSize = fontSize + 'vw';
 	elem.textContent = word[0];
 
-	// if occurence is high
-	if (word[1] > 5) {
-		elem.style.backgroundColor = 'black';
-		elem.style.color = 'white';
+	if (word[2]) {
+		elem.style.color = word[2];
+	} else if (word[1] > 5) {
+		elem.style.backgroundColor = '#facc15';
+		elem.style.color = '#1c1917';
 	}
 	if (wordPosition.direction == 'vertical') {
 		elem.style.writingMode = 'vertical-rl';
