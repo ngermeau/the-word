@@ -40,22 +40,18 @@ common_nouns = [token.text for token in nlp_document if token.pos_ == "NOUN"]
 common_nouns_count = Counter(common_nouns).most_common(counter_size)
 proper_nouns = [token.text for token in nlp_document if token.pos_ == "PROPN"]
 proper_nouns_count = Counter(proper_nouns).most_common(counter_size)
-verbs = [token.lemma_ for token in nlp_document if token.pos_ == "VERB"]
-verbs_count = Counter(verbs).most_common(counter_size)
 
 logger.info(f"### SAVING INTO DATABASE FOR {today} ")
 db_conn = db_connection()
 cursor = db_conn.cursor()
 cursor.execute(
-    "INSERT OR REPLACE INTO daily_articles_analysis(date, proper_nouns, proper_nouns_count, common_nouns, common_nouns_count, verbs, verbs_count) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    "INSERT OR REPLACE INTO daily_articles_analysis(date, proper_nouns, proper_nouns_count, common_nouns, common_nouns_count) VALUES (?, ?, ?, ?, ?)",
     (
         today,
         json.dumps(proper_nouns),
         json.dumps(proper_nouns_count),
         json.dumps(common_nouns),
         json.dumps(common_nouns_count),
-        json.dumps(verbs),
-        json.dumps(verbs_count),
     ),
 )
 db_conn.commit()

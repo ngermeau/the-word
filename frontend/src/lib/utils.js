@@ -1,6 +1,6 @@
 export let numberOfRows = 50;
 export let numberOfCols = 50;
-export let scale = 4;
+export let scale = 1;
 export let grid = Array(numberOfRows)
 	.fill(null)
 	.map(() => Array(numberOfCols).fill(0));
@@ -47,6 +47,7 @@ export function measureWord(word, orientation) {
 	if (orientation == 'vertical') {
 		elem.style.writingMode = 'vertical-rl';
 	}
+	elem.style.padding = '1px 2px';
 	elem.textContent = word[0];
 	document.body.appendChild(elem);
 	const rowSpan = Math.ceil(elem.offsetHeight / cellHeight);
@@ -68,7 +69,7 @@ export function drawWord(word, wordPosition) {
 	elem.textContent = word[0];
 
 	// if occurence is high
-	if (word[1] > 8) {
+	if (word[1] > 5) {
 		elem.style.backgroundColor = 'black';
 		elem.style.color = 'white';
 	}

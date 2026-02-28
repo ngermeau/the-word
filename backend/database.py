@@ -38,9 +38,7 @@ def init_daily_articles_analysis_table():
         proper_nouns TEXT,
         proper_nouns_count TEXT,
         common_nouns TEXT,
-        common_nouns_count TEXT,
-        verbs TEXT,
-        verbs_count TEXT
+        common_nouns_count TEXT
         )
     """)
     db_conn.commit()
