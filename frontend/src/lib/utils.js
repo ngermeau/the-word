@@ -5,6 +5,12 @@ export let grid = Array(numberOfRows)
 	.fill(null)
 	.map(() => Array(numberOfCols).fill(0));
 
+export function resetGrid() {
+	for (let row = 0; row < numberOfRows; row++) {
+		grid[row].fill(0);
+	}
+}
+
 // Pre-compute all grid positions sorted by Euclidean distance from center outward
 const centerRow = Math.floor(numberOfRows / 2);
 const centerCol = Math.floor(numberOfCols / 2);
@@ -19,7 +25,12 @@ for (let row = 0; row < numberOfRows; row++) {
 spiralOrder.sort((a, b) => a[2] - b[2]);
 
 export function isPositionAvailableInGrid(startRow, startCol, rowSpan, colSpan) {
-	if (startRow < 0 || startCol < 0 || startRow + rowSpan > numberOfRows || startCol + colSpan > numberOfCols) {
+	if (
+		startRow < 0 ||
+		startCol < 0 ||
+		startRow + rowSpan > numberOfRows ||
+		startCol + colSpan > numberOfCols
+	) {
 		return false;
 	}
 

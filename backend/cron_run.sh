@@ -14,7 +14,8 @@ source venv/bin/activate
 
 if [ "$1" = "fetch" ]; then
     python3 fetch_articles.py
-else
+elif [ "$1" = "analyse" ]; then
     python3 analyse_articles.py
+fi
 
 deactivate

@@ -1,11 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { findAvailablePosition, drawWord, numberOfRows, numberOfCols } from '$lib/utils.js';
+	import {
+		findAvailablePosition,
+		drawWord,
+		numberOfRows,
+		numberOfCols,
+		resetGrid
+	} from '$lib/utils.js';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	onMount(() => {
+	onMount(async () => {
+		await document.fonts.load('1em "Bebas Neue"');
+
 		// Use the frequencies data from the server load function
 		const frequencies = data.data?.data || [];
 

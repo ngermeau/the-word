@@ -11,6 +11,8 @@ from transformers import pipeline
 # Use today as current iteration
 today = datetime.now().date().isoformat()
 
+MAX_ARTICLES_PER_SOURCE = 20
+
 # Setup logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -83,7 +85,7 @@ for newspaper in newspapers:
         logger.error(f"{source_name} rss url is failing")
         logger.info("")
         continue
-    for entry in feed.entries:
+    for entry in feed.entries[:MAX_ARTICLES_PER_SOURCE]:
         article_title = translate_to_en(entry.title, language)
         articles.append(
             {
