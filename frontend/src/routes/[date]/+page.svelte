@@ -38,7 +38,8 @@
 			elem.style.cssText = `position:absolute;visibility:hidden;font-family:inherit;text-transform:uppercase;font-size:${baseScale[wordSteps[i]]}vw;padding:1px 2px`;
 			elem.textContent = w[0];
 			document.body.appendChild(elem);
-			totalCells += Math.ceil(elem.offsetWidth / cellWidth) * Math.ceil(elem.offsetHeight / cellHeight);
+			totalCells +=
+				Math.ceil(elem.offsetWidth / cellWidth) * Math.ceil(elem.offsetHeight / cellHeight);
 			document.body.removeChild(elem);
 		});
 
@@ -49,7 +50,7 @@
 		wordsArray = wordsArray.map((w, i) => [w[0], typeScale[wordSteps[i]]]);
 		wordsArray.push([data.date, typeScale[2], '#ffffff']);
 
-		wordsArray.sort(() => Math.random() - 0.5);
+		wordsArray.sort((a, b) => b[1] - a[1]);
 
 		wordsArray.forEach((word) => {
 			let wordPosition = findAvailablePosition(word);
@@ -62,10 +63,11 @@
 
 <style>
 	.container {
-		height: 100%;
+		width: 100vw;
+		height: 100vh;
 		display: grid;
 		grid-template-columns: repeat(50, 1fr);
 		grid-template-rows: repeat(50, 1fr);
-		place-items: start start;
+		place-items: center;
 	}
 </style>

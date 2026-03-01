@@ -1,38 +1,49 @@
-# sv
+# The Front Word - Frontend
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Interactive word cloud visualization of the most frequent words in international news headlines.
 
-## Creating a project
+## Overview
 
-If you're seeing this, you've probably already done this step. Congrats!
+This SvelteKit application displays word frequencies from global newspaper headlines as a dynamic word cloud. Words are placed on a 50x50 CSS grid using a custom layout algorithm that:
 
-```sh
-# create a new project in the current directory
-npx sv create
+- Measures each word's dimensions based on its frequency
+- Finds available positions trying horizontal then vertical orientations
+- Scales font size proportionally to word frequency
+- Highlights high-frequency words (>10 occurrences) with inverted colors
 
-# create a new project in my-app
-npx sv create my-app
-```
+## Getting Started
 
-## Developing
+```bash
+# Install dependencies
+npm install
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+# Start development server
 npm run dev
 
-# or start the server and open the app in a new browser tab
+# Or open in browser automatically
 npm run dev -- --open
 ```
 
-## Building
+The app runs at `http://localhost:5173` by default.
 
-To create a production version of your app:
+## Project Structure
 
-```sh
-npm run build
+```
+frontend/
+├── src/
+│   ├── lib/
+│   │   └── utils.ts      # Grid layout algorithm
+│   └── routes/
+│       ├── +page.svelte  # Main word cloud component
+│       └── +page.server.ts # Server-side data loading
+├── static/
+└── package.json
 ```
 
-You can preview the production build with `npm run preview`.
+## How It Works
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+1. Server loads word frequencies from the backend API
+2. Words are shuffled randomly for varied layouts
+3. Each word is measured using a hidden DOM element
+4. The algorithm finds the first available grid position
+5. Words are rendered with font size based on frequency

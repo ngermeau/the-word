@@ -5,8 +5,21 @@ export let grid = Array(numberOfRows)
 	.fill(null)
 	.map(() => Array(numberOfCols).fill(0));
 
+// Pre-compute all grid positions sorted by Euclidean distance from center outward
+const centerRow = Math.floor(numberOfRows / 2);
+const centerCol = Math.floor(numberOfCols / 2);
+const spiralOrder = [];
+for (let row = 0; row < numberOfRows; row++) {
+	for (let col = 0; col < numberOfCols; col++) {
+		const dr = row - centerRow;
+		const dc = col - centerCol;
+		spiralOrder.push([row, col, dr * dr + dc * dc]);
+	}
+}
+spiralOrder.sort((a, b) => a[2] - b[2]);
+
 export function isPositionAvailableInGrid(startRow, startCol, rowSpan, colSpan) {
-	if (startRow + rowSpan > numberOfRows || startCol + colSpan > numberOfCols) {
+	if (startRow < 0 || startCol < 0 || startRow + rowSpan > numberOfRows || startCol + colSpan > numberOfCols) {
 		return false;
 	}
 
@@ -23,14 +36,17 @@ export function findAvailablePosition(word) {
 	let horizontalSize = measureWord(word, 'horizontal');
 	let verticalSize = measureWord(word, 'vertical');
 
-	// Trying to find fiest valid position horizontal or vertical
-	for (let row = 0; row < numberOfRows; row++) {
-		for (let col = 0; col < numberOfCols; col++) {
-			if (isPositionAvailableInGrid(row, col, horizontalSize.rowSpan, horizontalSize.colSpan)) {
-				return { row, col, direction: 'horizontal', ...horizontalSize };
-			} else if (isPositionAvailableInGrid(row, col, verticalSize.rowSpan, verticalSize.colSpan)) {
-				return { row, col, direction: 'vertical', ...verticalSize };
-			}
+	// Scan positions from center outward; center each word on the candidate position
+	for (const [row, col] of spiralOrder) {
+		const hRow = row - Math.floor(horizontalSize.rowSpan / 2);
+		const hCol = col - Math.floor(horizontalSize.colSpan / 2);
+		if (isPositionAvailableInGrid(hRow, hCol, horizontalSize.rowSpan, horizontalSize.colSpan)) {
+			return { row: hRow, col: hCol, direction: 'horizontal', ...horizontalSize };
+		}
+		const vRow = row - Math.floor(verticalSize.rowSpan / 2);
+		const vCol = col - Math.floor(verticalSize.colSpan / 2);
+		if (isPositionAvailableInGrid(vRow, vCol, verticalSize.rowSpan, verticalSize.colSpan)) {
+			return { row: vRow, col: vCol, direction: 'vertical', ...verticalSize };
 		}
 	}
 }
