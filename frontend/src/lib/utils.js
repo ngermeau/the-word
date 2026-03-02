@@ -86,6 +86,7 @@ export function measureWord(word, orientation) {
 export function drawWord(word, wordPosition) {
 	let { row, col, colSpan, rowSpan, fontSize } = wordPosition;
 
+	console.log(word);
 	// Fill in the grid with the word
 	grid.slice(row, row + rowSpan).forEach((row) => {
 		row.fill(1, col, col + colSpan);
@@ -97,7 +98,7 @@ export function drawWord(word, wordPosition) {
 
 	if (word[2]) {
 		elem.style.color = word[2];
-	} else if (word[1] > 5) {
+	} else if (word[1] > 3) {
 		elem.style.backgroundColor = '#facc15';
 		elem.style.color = '#1c1917';
 	}
