@@ -86,7 +86,6 @@ export function measureWord(word, orientation) {
 export function drawWord(word, wordPosition) {
 	let { row, col, colSpan, rowSpan, fontSize } = wordPosition;
 
-	console.log(word);
 	// Fill in the grid with the word
 	grid.slice(row, row + rowSpan).forEach((row) => {
 		row.fill(1, col, col + colSpan);

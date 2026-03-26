@@ -1,12 +1,12 @@
-# The Front Word
+# The Word
 
 A news aggregation and visualization project that fetches headlines from international sources, analyzes word frequencies using NLP, and displays them as an interactive word cloud.
 
-Every day, The Front Word pulls headlines from major international outlets (The Guardian, BBC, Financial Times, Al Jazeera, Times of India, Japan Times), extracts the most significant nouns using spaCy NLP, and renders them as a typographic word cloud — larger words appeared more frequently in the news that day.
+Every day, The Word pulls headlines from major international outlets (The Guardian, BBC, Financial Times, Al Jazeera, Times of India, Japan Times), extracts the most significant nouns using spaCy NLP, and renders them as a typographic word cloud — larger words appeared more frequently in the news that day.
 
 **Stack:** Python, FastAPI, spaCy, feedparser, SQLite, SvelteKit
 
-![The Front Word – 2026-03-01](screenshot.png)
+![The Word – 2026-03-01](screenshot.png)
 
 ---
 

@@ -1,1 +1,48 @@
+# Playwright
 .playwright-mcp/
+
+# Logs
+*.log
+logs/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Node
+node_modules/
+.output/
+.vercel/
+.netlify/
+.wrangler/
+.svelte-kit/
+/frontend/build/
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# DB
+*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
