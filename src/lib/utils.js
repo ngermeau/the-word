@@ -105,5 +105,7 @@ export function drawWord(word, wordPosition) {
 		elem.style.writingMode = 'vertical-rl';
 	}
 	elem.style.gridArea = `${row + 1} / ${col + 1} / span ${rowSpan} / span ${colSpan}`;
+	elem.classList.add('word');
 	document.querySelector('.container').appendChild(elem);
+	return elem;
 }
