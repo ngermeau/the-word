@@ -54,6 +54,15 @@
     wordsArray = wordsArray.map((w, i) => [w[0], typeScale[wordSteps[i]]]);
     wordsArray.push([data.date, typeScale[2], "#ffffff"]);
     wordsArray.sort((a, b) => b[1] - a[1]);
+    // Anchor the largest word at center; shuffle the rest so size doesn't dictate radial position.
+    for (let i = wordsArray.length - 1; i > 1; i--) {
+      const j = 1 + Math.floor(Math.random() * i);
+      [wordsArray[i], wordsArray[j]] = [wordsArray[j], wordsArray[i]];
+    }
+    console.log(
+      "placement order:",
+      wordsArray.map((w) => w[0]).slice(0, 10),
+    );
 
     const elements: HTMLElement[] = [];
     wordsArray.forEach((word) => {
